@@ -1,12 +1,13 @@
 package main
 
 import (
-	"context"
 	"fmt"
 	"log"
 	"net"
+	"strconv"
+	"time"
 
-	"github.com/vremy/go-grpc-examples/unary/proto"
+	"github.com/vremy/go-grpc-examples/server_stream/proto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
@@ -16,26 +17,30 @@ type server struct {
 }
 
 /**
- * Handle the StoreMessage service
+ * Handle the GetStreamedMessages service
  */
-func (c *server) StoreMessage(ctx context.Context, request *proto.MessageRequest) (*proto.MessageResponse, error) {
-	fmt.Printf("StoreMessage service was invoked with %v\n", request)
-
+func (c *server) GetStreamedMessages(request *proto.MessageRequest, stream proto.Services_GetStreamedMessagesServer) error {
 	/** Retrieve the name and message from the request */
 	name := request.Message.GetName()
-	message := request.Message.GetMessage()
 
-	/** Create a response as described by the proto file */
-	response := &proto.MessageResponse{
-		Result: "Received message: '" + message + "' from '" + name + "'.",
+	fmt.Printf("[!] GetStreamedMessages service was invoked with %v\n", request)
+
+	for i := 0; i < 5; i++ {
+		/** Create a response as described by the proto file */
+		response := &proto.MessageResponse{
+			Result: "Hello " + name + " this is response " + strconv.Itoa(i),
+		}
+
+		/** Stream each response back to the client with an interval of 1 sec */
+		stream.Send(response)
+		time.Sleep(1 * time.Second)
 	}
 
-	/** respond back to the client with the response created above */
-	return response, nil
+	return nil
 }
 
 func main() {
-	fmt.Println("[*] Unary server listening for RPC calls...")
+	fmt.Println("[*] Stream server listening for RPC calls...")
 
 	/**
 	 * Create a TCP listener listening on 0.0.0.0:50051. Port 50051 is the
