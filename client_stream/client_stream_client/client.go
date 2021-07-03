@@ -35,7 +35,7 @@ func main() {
 }
 
 func requestClientStreamService(client proto.ServicesClient) {
-	/** Give the server 5 seconds to respond or else cancel the request. */
+	/** Give the server 10 seconds to respond or else cancel the request. */
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
