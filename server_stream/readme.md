@@ -8,7 +8,7 @@ the message itself. The server will respond by telling the client it received
 the message from the sender in 5 seperate response through streaming.
 
 ## Usage
-1. Open two terminals in split screen mode in the unary directory;
+1. Open two terminals in split screen mode in the server_stream directory;
 1. Run the server in the left screen by running the following command.
     ```sh
     go run server_stream_server/server.go

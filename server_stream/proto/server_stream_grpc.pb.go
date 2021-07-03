@@ -20,12 +20,12 @@ const _ = grpc.SupportPackageIsVersion7
 type ServicesClient interface {
 	//*
 	// Define a service name StoreMessage which will become available in the
-	// unary server. This service takes a request from the type MessageRequest
-	// which contain a single Message object. This Message object contains a
-	// name from the sender and the message itself. The server will handle this
-	// request and will respond with a response from the type MessageResponse.
-	// This response object will contain a single result string which will be
-	// read by the unary client.
+	// server_stream server. This service takes a request from the type
+	// MessageRequest which contain a single Message object. This Message
+	// object contains a name from the sender and the message itself. The
+	// server will handle this request and will respond with a response from
+	// the type MessageResponse. This response object will contain a single
+	// result string which will be read by the server_stream client.
 	GetStreamedMessages(ctx context.Context, in *MessageRequest, opts ...grpc.CallOption) (Services_GetStreamedMessagesClient, error)
 }
 
@@ -75,12 +75,12 @@ func (x *servicesGetStreamedMessagesClient) Recv() (*MessageResponse, error) {
 type ServicesServer interface {
 	//*
 	// Define a service name StoreMessage which will become available in the
-	// unary server. This service takes a request from the type MessageRequest
-	// which contain a single Message object. This Message object contains a
-	// name from the sender and the message itself. The server will handle this
-	// request and will respond with a response from the type MessageResponse.
-	// This response object will contain a single result string which will be
-	// read by the unary client.
+	// server_stream server. This service takes a request from the type
+	// MessageRequest which contain a single Message object. This Message
+	// object contains a name from the sender and the message itself. The
+	// server will handle this request and will respond with a response from
+	// the type MessageResponse. This response object will contain a single
+	// result string which will be read by the server_stream client.
 	GetStreamedMessages(*MessageRequest, Services_GetStreamedMessagesServer) error
 	mustEmbedUnimplementedServicesServer()
 }
