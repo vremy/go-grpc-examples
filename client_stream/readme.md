@@ -11,7 +11,7 @@ server. Each streamed message request contains a name and the message itself.
 1. Open two terminals in split screen mode in the client_stream directory;
 1. Run the server in the left screen by running the following command.
     ```sh
-    go run client_stream_server/srver.go 
+    go run client_stream_server/server.go 
     ```
 1. Run the client in the right screen by running the following command;
     ```sh
