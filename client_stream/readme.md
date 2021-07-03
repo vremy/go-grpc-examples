@@ -1,4 +1,4 @@
-# Server stream GRPC service example
+# Client stream GRPC service example
 This example demonstrate a GRPC server and client communicating with each other
 in client stream mode. This means that a client streams multiple request to the
 server. The server responds one time to indicate to the client it received all
