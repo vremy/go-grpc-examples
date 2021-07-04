@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package server_stream;
+option go_package="/proto";
+
+/** A single message containing the name of the sender and the message itself */
+message Message {
+    string name = 1;
+    string message = 2;
+}
+
+/**
+ * A message request containing a Message object.This object will be send by
+ * the client and received by the server.
+ */
+message MessageRequest {
+    Message message = 1;
+}
+
+/**
+ * A message response containing a string with the result. This object will be
+ * send by the server as response and received by the client.
+ */
+message MessageResponse {
+    string result = 1;
+}
+
+service Services {
+    /**
+      * Define a service name StreamedMessages which will become available in
+      * the bi_directional_stream server. This service takes a request from the
+      * type MessageRequest which contain a single Message object. This Message
+      * object contains a name from the sender and the message itself. The
+      * server will handle this request and will respond with a response from
+      * the type MessageResponse. This response object will contain a single
+      * result string which will be read by the bi_directional_stream client.
+      */
+    rpc StreamedMessages(stream MessageRequest) returns (stream MessageResponse) {};
+}
