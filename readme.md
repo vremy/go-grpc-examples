@@ -28,6 +28,11 @@ server.
 
 ---
 
+## Reflection
+All examples have reflection enabled by default. Reflection provides information
+about the GRPC services that are reachable on the server. The GRPC client from
+[Evans](https://github.com/ktr0731/evans) can be used to read this information.
+
 ## Go package management
 A go package requires a go.mod file to track all dependencies required for the
 package. To initialize this file i used the command below.
